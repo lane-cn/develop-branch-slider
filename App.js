@@ -1,112 +1,95 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React from 'react';
-import type {Node} from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
+  Dimensions,
   StyleSheet,
-  Text,
-  useColorScheme,
+  ScrollView,
   View,
 } from 'react-native';
+import Preview from './src/Preview';
+import FlatListSlider from './src/FlatListSlider';
+// import {FlatListSlider} from 'react-native-flatlist-slider';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default class extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        {
+          image: 'https://alifei03.cfp.cn/creative/vcg/veer/1600water/veer-168883842.jpg',
+          desc: 'Silent Waters in the mountains in midst of Himilayas',
+        },
+        {
+          image: 'https://tenfei03.cfp.cn/creative/vcg/veer/1600water/veer-165494097.jpg',
+          desc: 'Red fort in India New Delhi is a magnificient masterpeiece of humans',
+        },
+        {
+          image: 'https://tenfei03.cfp.cn/creative/vcg/veer/1600water/veer-133616717.jpg',
+          desc: 'Sample Description below the image for representation purpose only',
+        },
+        {
+          image: 'https://alifei05.cfp.cn/creative/vcg/veer/1600water/veer-416214024.jpg',
+          desc: 'Sample Description below the image for representation purpose only',
+        },
+        {
+          image: 'https://tenfei05.cfp.cn/creative/vcg/veer/1600water/veer-402171909.jpg',
+          desc: 'Sample Description below the image for representation purpose only',
+        }
+      ]
+    };
+  }
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
+  render() {
+    const screenWidth = Math.round(Dimensions.get('window').width);
+    return (
+      <SafeAreaView>
+        <ScrollView>
+          <FlatListSlider 
+            data={this.state.data}
+            timer={2000}
+            imageKey={'image'}
+            local={false}
+            width={screenWidth}
+            separator={0}
+            loop={true}
+            autoscroll={true}
+            currentIndexCallback={index => console.log('Index', index)}
+            onPress={item => alert(JSON.stringify(item))}
+            indicator
+            animation
+          />
+          <View style={styles.separator} />
+          <FlatListSlider
+            data={this.state.data}
+            width={275}
+            timer={4000}
+            component={<Preview />}
+            onPress={item => alert(JSON.stringify(item))}
+            indicatorActiveWidth={40}
+            contentContainerStyle={styles.contentStyle}
+          />
+          <View style={styles.separator} />
+          <FlatListSlider
+            data={this.state.data}
+            timer={5000}
+            onPress={item => alert(JSON.stringify(item))}
+            indicatorContainerStyle={{position:'absolute', bottom: 20}}
+            indicatorActiveColor={'#8e44ad'}
+            indicatorInActiveColor={'#ffffff'}
+            indicatorActiveWidth={30}
+            animation
+          />
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  separator: {
+    height: 20,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
+  contentStyle: {
+    paddingHorizontal: 16,
+  }
 });
-
-export default App;
