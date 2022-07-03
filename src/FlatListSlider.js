@@ -148,8 +148,10 @@ export default class FlatListSlider extends Component {
   }
 
   changeSliderListIndex = () => {
-    if (this.props.animation) {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeIn);
+    console.log('changeSliderListIndex', this.props.animation);
+    console.log('easeIn', LayoutAnimation.Presets);
+    if (this.props.animation && LayoutAnimation && LayoutAnimation.Presets && LayoutAnimation.Presets.easeInEaseOut) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     }
     this.setState({index: this.state.index + 1});
     this.slider.current.scrollToIndex({
@@ -159,17 +161,19 @@ export default class FlatListSlider extends Component {
   };
 
   startAutoPlay = () => {
-    // this.sliderTimer = setInterval(
-    //   this.changeSliderListIndex,
-    //   this.props.timer,
-    // );
+    console.log('startAutoPlay', this.props.timer);
+    this.sliderTimer = setInterval(
+      this.changeSliderListIndex,
+      this.props.timer,
+    );
   };
 
   stopAutoPlay = () => {
-    // if (this.sliderTimer) {
-    //   clearInterval(this.sliderTimer);
-    //   this.sliderTimer = null;
-    // }
+    if (this.sliderTimer) {
+      console.log('stopAutoPlay', this.sliderTimer);
+      clearInterval(this.sliderTimer);
+      this.sliderTimer = null;
+    }
   };
 }
 
