@@ -1,30 +1,23 @@
 {
   "name": "develop-branch-slider",
-  "version": "1.0.0",
-  "private": true,
+  "version": "1.1.0",
+  "description": "React Native FlatList Slider Component ",
+  "main": "index.js",
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "react": "18.0.0",
-    "react-native": "0.69.1",
-    "react-native-flatlist-slider": "^1.0.6"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lane-cn/develop-branch-slider.git"
   },
-  "devDependencies": {
-    "@babel/core": "^7.12.9",
-    "@babel/runtime": "^7.12.5",
-    "@react-native-community/eslint-config": "^2.0.0",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.32.0",
-    "jest": "^26.6.3",
-    "metro-react-native-babel-preset": "^0.70.3",
-    "react-test-renderer": "18.0.0"
+  "keywords": [
+    "slider",
+    "imageslider"
+  ],
+  "author": "Lane Lu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lane-cn/develop-branch-slider/issues"
   },
-  "jest": {
-    "preset": "react-native"
-  }
+  "homepage": "https://github.com/lane-cn/develop-branch-slider"
 }
